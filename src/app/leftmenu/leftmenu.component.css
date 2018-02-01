@@ -16,6 +16,7 @@ p{
     padding-left: 0px;
     margin:1px;
     display:inline-block;
+    background-color: rgb(219, 56, 6) !important;
     
 }
 
@@ -27,6 +28,10 @@ p{
 .active > p::after  {
     content: ']';
 }
-a.selected > p{
-    background-color: rgb(219, 56, 6) !important;
+
+a.selected > p:not(:hover){
+    
+}
+a:not(:hover) {
+    background-color: none;
 }

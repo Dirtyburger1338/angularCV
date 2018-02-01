@@ -1,4 +1,4 @@
-import { Component, OnInit,HostListener } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 declare var jquery: any;
 declare var $: any;
 
@@ -9,82 +9,41 @@ declare var $: any;
 })
 
 export class DeviceComponent implements OnInit {
-
-  contentAreaLinks: any;
-  currentView: any;
-  activeMenu: boolean;
-  counter: number;
+  
+  i : number;
+  modal : any;
+  btn : any;
+  span : any;
 
   constructor() { }
 
   ngOnInit() {
-    this.contentAreaLinks = $('.device-links > a');
-    this.contentAreaLinks[0].classList.add("selected");
-    this.counter = 0;
-    this.activeMenu = true;
-  }
-  
-  @HostListener('document:keydown', ['$event'])
-  handleKeyboardEvent(event: KeyboardEvent) {
-    let x = event.keyCode;
+    this.modal = document.getElementById('myModal');
+    this.i = 0;
+    this.span = document.getElementsByClassName("close")[0];
 
-    // is this the active view
-    var cat = $('.active');
-    if(this.activeMenu === true){
+  }
+
+  openModal() {
+    if($(this.modal).css('display') != 'block'){
+      typeWriter(this.i);
+    }
+    this.modal.style.display = "block";         
+  }
+
+
+
+}
+function typeWriter(i) {
+  var txt = "cd images";
+
+
+    let intervalId = setInterval(() => {  
+      if (i < txt.length) {
+        document.getElementById("animatedText").innerHTML += txt.charAt(i);
+        i++;
+    }
+    }, 40);
     
-    switch (x) {
-      case 40: {
-        this.contentAreaLinks.removeClass('selected');
-        this.counter++;
-        let index = ((this.counter % this.contentAreaLinks.length) + this.contentAreaLinks.length) % this.contentAreaLinks.length;
-        let myObj = this.contentAreaLinks[index];
-        myObj.classList.add("selected");
-        break;
-      }
-      case 39: {
-        console.log("right");
-        let index = ((this.counter % this.contentAreaLinks.length) + this.contentAreaLinks.length) % this.contentAreaLinks.length;
-        this.contentAreaLinks[index].click();
-
-        break;
-      }
-      case 38: {
-        this.contentAreaLinks.removeClass('selected');
-        this.counter--;
-        let index = ((this.counter % this.contentAreaLinks.length) + this.contentAreaLinks.length) % this.contentAreaLinks.length;
-        let myObj = this.contentAreaLinks[index];
-        myObj.classList.add("selected");
-        break;
-      }
-      case 37: {
-        console.log("left");
-        break;
-      }
-      case 27: {
-        console.log("esc");
-        this.contentAreaLinks.removeClass('selected');
-        this.activeMenu = false;
-        
-        break;
-      }
-      case 13: {
-        console.log("enter")
-        
-        let index = ((this.counter % this.contentAreaLinks.length) + this.contentAreaLinks.length) % this.contentAreaLinks.length;
-        this.contentAreaLinks[index].click();
-
-        this.afterMenuClick();
-        break;
-      }      
-    }
-
-    }
-  }
-  afterMenuClick() {
-    this.activeMenu = false;
-    this.contentAreaLinks.removeClass('selected');
-    this.contentAreaLinks = $('.menu-wrapper > a'); 
-
-
-  }
+  
 }

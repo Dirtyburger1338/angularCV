@@ -6,12 +6,13 @@
 body{
     margin: 0;
     font-family: myFirstFont;
-    font-size:24px;
+    font-size:42px;
+    font-size:2.5vw;
     color: white;
     background-color: rgb(30, 50, 228);
 }
 p{
-    margin: 15px;
+    margin: 0px;
 }
 mark.yellow{
     color:yellow;
@@ -20,18 +21,32 @@ mark.yellow{
 mark.grey{
     color:rgb(168, 168, 168);
     background: none;
+    float: right;
 }
 
 a{
-    margin: 0;
     font-family: myFirstFont;
-    font-size:24px;
+    font-size:42px;
+    
+    font-size:2.5vw;
     color: white;
     text-decoration: none;
 }
-
+.active{
+    color: white;
+    margin: 0px;
+}
 a:hover > p{
     /* color:rgb(35, 235, 17); */
     background-color: rgb(219, 56, 6) !important;
    
 }
+a.selected > p{
+    background-color: rgb(219, 56, 6) !important;
+}
+a:hover::before{
+    /* content: "\25B6";*/
+}
+ul{
+    list-style-type:none;
+    }

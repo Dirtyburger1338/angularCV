@@ -12,103 +12,145 @@ declare var $: any;
   styleUrls: ['./app.component.css']
 })
 
-
 export class AppComponent implements OnInit {
 
   title = 'app';
 
-  leftMenuLinks: any;
+  MenuElements: any;
   contentAreaLinks: any;
   currentView: any;
   isLeftMenuActive: boolean;
   counter: number;
-  counterContent = 0;
+  counterContent: number;
 
   ngOnInit() {
-    this.leftMenuLinks = $('.menu-wrapper > a');
-    
+    this.MenuElements = $('.menu-wrapper > a');
     this.isLeftMenuActive = true;
     this.counter = 0;
+    this.counterContent = 0;
   }
 
+  /* If isLeftMenuActive is true we only do stearing on the left menu.
+  If false, we instead navigate in the rightside component which content 
+  is always wrapped in a div with class "device-links"  */
+
+
+  // FIXA OnClick med mus så countern uppdateras
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
-    let x = event.keyCode;
-    this.contentAreaLinks = $('.device-links > a');
-    
-    var corv = $('.device-links > a');
-    console.log(corv);
-    if (x === 27) {
-      this.isLeftMenuActive = true;
+    let keyPress = event.keyCode;
+    if (this.isLeftMenuActive === false) {
+      this.MenuElements = $('.device-links > li > a');
     }
-    if (this.isLeftMenuActive === true) {
+    else {
+      this.MenuElements = $('.menu-wrapper > li > a');
+    }
 
-      switch (x) {
-        case 40: {
-          this.leftMenuLinks.removeClass('selected');
+
+
+    switch (keyPress) {
+      case 40: {
+        // ArrowDown and add Selected (which highlights red) 
+        this.MenuElements.removeClass('selected');
+        
+
+        if (this.isLeftMenuActive === true) {
           this.counter++;
-          let index = ((this.counter % this.leftMenuLinks.length) + this.leftMenuLinks.length) % this.leftMenuLinks.length;
-          let myObj = this.leftMenuLinks[index];
-          myObj.classList.add("selected");
-          break;
+          this.MenuElements[this.getIndex()].classList.add("selected");
+          this.MenuElements[this.getIndex()].click();
+        }else{
+          this.counterContent++;
+          this.MenuElements[this.getIndex()].classList.add("selected");
         }
-        case 39: {
-          console.log("right");
-          let index = ((this.counter % this.leftMenuLinks.length) + this.leftMenuLinks.length) % this.leftMenuLinks.length;
-          this.leftMenuLinks[index].click();
 
-          this.afterMenuClick();
+        break;
+      }
 
-          break;
+      case 39: {
+        // Rightarrow treated same as enter
+        if(this.isLeftMenuActive === true){
+          this.MenuElements[this.getIndex()].click();
+          this.isLeftMenuActive = false;
+          this.MenuElements.removeClass('selected');
+  
+          this.MenuElements = $('.device-links > li > a');
+          console.log(this.MenuElements);
+          this.MenuElements[0].classList.add("selected");
         }
-        case 38: {
-          this.leftMenuLinks.removeClass('selected');
+        else{
+          this.MenuElements[this.getIndex()].click();
+        }  
+        break;
+      }
+
+      case 38: {
+        // Move up and add Selected (which highlights red) 
+        this.MenuElements.removeClass('selected');
+
+      if (this.isLeftMenuActive === true) {
           this.counter--;
-          let index = ((this.counter % this.leftMenuLinks.length) + this.leftMenuLinks.length) % this.leftMenuLinks.length;
-          let myObj = this.leftMenuLinks[index];
-          myObj.classList.add("selected");
-          break;
+          this.MenuElements[this.getIndex()].classList.add("selected");
+          this.MenuElements[this.getIndex()].click();
+        }else{
+          this.counterContent--;
+          this.MenuElements[this.getIndex()].classList.add("selected");
         }
-        case 37: {
-          console.log("left");
-          break;
+        break;
+      }
+
+      case 37: {
+        // Leftarrow treated as ESC
+        if (this.isLeftMenuActive !== true) {
+          this.MenuElements.removeClass('selected');
+          this.MenuElements = $('.menu-wrapper > li >.active');
+          this.isLeftMenuActive = true;
+          this.MenuElements[this.getIndex()].classList.add("selected");
+          this.counterContent = 0;
+
         }
-        case 27: {
-          console.log("esc");
-          var cat = $('.active');
-          this.leftMenuLinks.removeClass('selected');
-          let index = ((this.counter % this.leftMenuLinks.length) + this.leftMenuLinks.length) % this.leftMenuLinks.length;
-          let myObj = this.leftMenuLinks[index];
-          myObj.classList.add("selected");
-          break;
+        break;
+      }
+
+      case 27: {
+
+        // (ESC) Remove the selected (red background) from the menu and put IsLeftMenuActive to true
+        if (this.isLeftMenuActive !== true) {
+          this.MenuElements.removeClass('selected');
+          this.MenuElements = $('.menu-wrapper > li > .active');
+
+          this.isLeftMenuActive = true;
+          this.MenuElements[this.getIndex()].classList.add("selected");
+          this.counterContent = 0;
         }
-        case 13: {
-          console.log("enter");
+        break;
+      }
 
-          let index = ((this.counter % this.leftMenuLinks.length) + this.leftMenuLinks.length) % this.leftMenuLinks.length;
-          let myObj = this.leftMenuLinks[index];
-          console.log("hasclass "+this.leftMenuLinks[index]);
-         
-            this.leftMenuLinks[index].click();
-
-            this.afterMenuClick();
-          
-         
-
-
-
-          break;
+      case 13: {
+        // (ENTER) 
+        if(this.isLeftMenuActive === true){
+          this.MenuElements[this.getIndex()].click();
+          this.isLeftMenuActive = false;
+          this.MenuElements.removeClass('selected');
+  
+          this.MenuElements = $('.device-links > li > a');
+          this.MenuElements[0].classList.add("selected");
         }
+        else{
+          this.MenuElements[this.getIndex()].click();
+        }  
+        break;
+
       }
     }
   }
-  afterMenuClick() {
-    this.isLeftMenuActive = false;
-    this.leftMenuLinks.removeClass('selected');
-    this.contentAreaLinks = $('.menu-wrapper > a');
-
-
+  getIndex(): number {
+    if (this.isLeftMenuActive === true) {
+      return ((this.counter % this.MenuElements.length) + this.MenuElements.length) % this.MenuElements.length;
+    }
+    else {
+      return ((this.counterContent % this.MenuElements.length) + this.MenuElements.length) % this.MenuElements.length;
+    }
   }
 
 }

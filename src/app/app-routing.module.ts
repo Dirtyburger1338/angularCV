@@ -8,7 +8,8 @@ import {VersionComponent} from './version/version.component'
 
 const routes: Routes = [
   
-  { path: '', redirectTo: '/device', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: ContentComponent },
   { path: 'device', component: DeviceComponent },
   { path: 'version', component: VersionComponent },
   { path: 'features', component: FeaturesComponent },

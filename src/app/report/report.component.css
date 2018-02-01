@@ -1,0 +1,30 @@
+mark.yellow{
+    float:right;
+}
+.active{
+    color: white;
+    margin: 2px;
+}
+p{
+  padding-left: 10px;  
+  margin: 0;
+  margin:1px;
+}
+
+.active > p {
+    padding-left: 0px;
+    margin:1px;
+    
+}
+
+.active > p::before { 
+    content: '[';
+
+}
+
+.active > p::after  {
+    content: ']';
+}
+a.selected > p{
+    background-color: rgb(219, 56, 6) !important;
+}

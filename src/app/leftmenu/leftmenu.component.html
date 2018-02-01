@@ -1,11 +1,47 @@
-<div class="menu-wrapper">
-<a  [routerLink]="['device']"  [routerLinkActive]="['active']" href="#" class="selected"><p>Device Details</p></a>
-<a  [routerLink]="['features']"  [routerLinkActive]="['active']" href=""><p>OnBoard Features</p></a>
-<p><mark class="grey">OnBoard Audio Function</mark></p>
-<p><mark class="grey">OnBoard SATA3.0</mark></p>
-<a [routerLink]="['version']" [routerLinkActive]="['active']" href=""><p>Version List</p></a>
-<p><mark class="grey">SMART LAN</mark></p>
-<p><mark class="grey">USB Controllers</mark></p>
-<p><mark class="grey">USB Legacy</mark></p>
-<a  [routerLink]="['report']" [routerLinkActive]="['active']" href="#"><p>Request Support</p></a>
-</div>
+<ul class="menu-wrapper">
+    <li>
+        <a [routerLink]="['device']" [routerLinkActive]="['active']" href="#" class="selected">
+            <p>Device Details</p>
+        </a>
+    </li>
+    <li>
+        <a [routerLink]="['features']" [routerLinkActive]="['active']" href="">
+            <p>Device Features</p>
+        </a>
+    </li>
+    <li>
+        <p>
+            <mark class="grey">OnBoard Audio Function</mark>
+        </p>
+    </li>
+    <li>
+        <p>
+            <mark class="grey">OnBoard SATA3.0</mark>
+        </p>
+    </li>
+    <li>
+        <a [routerLink]="['version']" [routerLinkActive]="['active']" href="">
+            <p>Version List</p>
+        </a>
+    </li>
+    <li>
+        <p>
+            <mark class="grey"> SMART LAN</mark>
+        </p>
+    </li>
+    <li>
+        <p>
+            <mark class="grey"> USB Controllers</mark>
+        </p>
+    </li>
+    <li>
+        <p>
+            <mark class="grey"> USB Legacy</mark>
+        </p>
+    </li>
+    <li>
+        <a [routerLink]="['report']" [routerLinkActive]="['active']" href="#">
+            <p>Request Support</p>
+        </a>
+    </li>
+</ul>
