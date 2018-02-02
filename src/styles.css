@@ -45,7 +45,7 @@ a.selected > p{
     background-color: rgb(219, 56, 6) !important;
 }
 a:hover::before{
-    /* content: "\25B6";*/
+     /* content: '\25B6'; */
 }
 ul{
     list-style-type:none;
