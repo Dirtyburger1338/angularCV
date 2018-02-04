@@ -28,6 +28,7 @@ export class AppComponent implements OnInit {
     this.isLeftMenuActive = true;
     this.counter = 0;
     this.counterContent = 0;
+    typeWriter("bootup", "Catalan");
   }
 
   /* If isLeftMenuActive is true we only do stearing on the left menu.
@@ -144,6 +145,7 @@ export class AppComponent implements OnInit {
       }
     }
   }
+
   getIndex(): number {
     if (this.isLeftMenuActive === true) {
       return ((this.counter % this.MenuElements.length) + this.MenuElements.length) % this.MenuElements.length;
@@ -153,5 +155,21 @@ export class AppComponent implements OnInit {
     }
   }
 
+
+}
+
+function typeWriter(span, text) {
+  var i = 0;
+  var txt = "<br>cd images<br>okefkef";
+
+
+    let intervalId = setInterval(() => {  
+      if (i < txt.length) {
+        document.getElementById("bootup").innerHTML += txt.charAt(i);
+        i++;
+    }
+    }, 40);
+    
+  
 }
 
