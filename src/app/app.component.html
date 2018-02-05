@@ -1,23 +1,30 @@
 <div class="main-wrapper">
 
-<!--Header.-->
+  <!--Header.-->
   <div class="top-menu-div">
     <p>CV Setup Utility - Copyright (C) 1986-2002 Software Menu</p>
-    <p>Integrated Peripherals: <mark class="yellow">[Keyboard And Mouse]</mark></p>
+    <p>Integrated Peripherals:
+      <mark class="teal">[Keyboard And Mouse]</mark>
+    </p>
   </div>
 
-    <!--Menu.-->  
-    <div  class="leftmenu-div"><app-leftmenu></app-leftmenu></div>
+      <!--Menu.-->
+      <div class="leftmenu-div">
+        <app-leftmenu></app-leftmenu>
+      </div>
 
-    <!--ContentArea-->
-    <div class="content-div">
+      <!--ContentArea-->
+      <div class="content-div">
         <router-outlet></router-outlet>
       </div>
-  
-    <!--Footer-->
+
+
+  <!--Footer-->
   <div class="bot-menu-div">
-    <p>&#x25B6; &#x25B2; &#x25BC; &#x25C0;: Move  Enter: Select F5: Previus Values F6: Fail-Safe Defaults   F7:Optimized Defaults  ESC: Exit</p>
+    <span>
+      <mark class="signs">&#x25B6; &#x25B2; &#x25BC; &#x25C0;</mark>:Move &nbsp; Enter:Select&nbsp; 
+      <mark class="grey">F5:Previus Values&nbsp; F6:Fail-Safe Defaults&nbsp; F7:Optimized Defaults&nbsp;</mark> ESC:Exit
+    </span>
   </div>
 
 </div>
-

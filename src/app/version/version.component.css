@@ -6,9 +6,11 @@ mark.yellow{
     margin: 2px;
 }
 p{
-  padding-left: 10px;  
-  margin: 0;
-  margin:1px;
+  padding-left: 10px; 
+  margin:18px;
+}
+article {
+    margin-bottom: 60px;
 }
 
 .active > p {
