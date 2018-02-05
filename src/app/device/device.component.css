@@ -11,14 +11,17 @@
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
 }
-
+span{
+    color:rgb(65, 211, 255);
+}
 .modal-content {
     /* the cmd window */
     background-color: #000000;
     border: 3px solid rgb(236, 236, 236);
     border-top: none;
     outline: none;
-    width: 45vw;
+    width: 600px;
+    max-width: 100vw;
     height: 30vw;
     margin: 0px;
     padding: 0px;

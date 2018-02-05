@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   counterContent: number;
 
   ngOnInit() {
-    this.MenuElements = $('.menu-wrapper > a');
+    this.MenuElements = $('.menu-wrapper > li > a');
     this.isLeftMenuActive = true;
     this.counter = 0;
     this.counterContent = 0;
@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
         // Leftarrow treated as ESC
         if (this.isLeftMenuActive !== true) {
           this.MenuElements.removeClass('selected');
-          this.MenuElements = $('.menu-wrapper > li >.active');
+          this.MenuElements = $('.menu-wrapper > li > .active');
           this.isLeftMenuActive = true;
           this.MenuElements[this.getIndex()].classList.add("selected");
           this.counterContent = 0;
