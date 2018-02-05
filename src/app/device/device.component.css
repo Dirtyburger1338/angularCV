@@ -11,7 +11,9 @@
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.4);
 }
-
+span{
+    color:rgb(65, 211, 255);
+}
 .modal-content {
     /* the cmd window */
     background-color: #000000;

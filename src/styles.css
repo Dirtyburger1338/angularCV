@@ -23,7 +23,11 @@ mark.grey{
     background: none;
     float: right;
 }
-
+mark.teal{
+    color:rgb(65, 211, 255);
+    background: none;
+    float: right;
+}
 a{
     font-family: myFirstFont;
     font-size:42px;

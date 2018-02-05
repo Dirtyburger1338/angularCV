@@ -28,3 +28,14 @@ p{
 a.selected > p{
     background-color: rgb(219, 56, 6) !important;
 }
+span {
+    color:rgb(65, 211, 255);
+}
+.topSpan {
+padding: 40px;
+margin-top: 10px;
+}
+ul>li>span:last-child {
+    float: right;
+    padding-right: 15px;
+}
