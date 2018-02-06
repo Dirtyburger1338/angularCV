@@ -11,7 +11,6 @@
     align-content: center;
     align-items: center;
     padding: 15px;
-    
 }
 
 .content-div {
@@ -23,10 +22,11 @@
     overflow: auto;
 }
 
-.outerDiv{
+.outerDiv {
     border: solid;
     border-color: white;
 }
+
 .leftmenu-div {
     grid-row: 2/3;
     grid-column: 1/2;
@@ -40,8 +40,51 @@
     padding: 15px;
 }
 
-.modal-content {
-    /* The background with the oopacity */
+.modal-sata {
+    width: 100vw;
+    visibility: hidden;
+    font-size: 1.8vw;
+}
+
+table {
+    padding-top: 50px;
+}
+
+th, td {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#virtual-devices {
+    padding-top: 20px;
+    visibility: hidden;
+    font-size: 1.8vw;
+}
+
+#pressEnter {
+    padding-top: 40px;
+    visibility: hidden;
+    font-size: 2vw;
+}
+
+.underscore {
+    -webkit-animation: blink 800ms step-end infinite;
+    animation: blink 800ms step-end infinite;
+}
+
+@-webkit-keyframes blink {
+    50% {
+        color: rgb(0, 0, 0);
+    }
+}
+
+@keyframes blink {
+    50% {
+        color: rgb(0, 0, 0);
+    }
+}
+
+.modalboot {
     display: block;
     position: absolute;
     z-index: 1;
@@ -51,53 +94,23 @@
     height: 100vh;
     background-color: rgb(0, 0, 0);
     margin: 0;
-    padding:0;
+    padding: 0;
 }
 
-.modal-sata{
-    width: 100vw;
-    visibility: hidden;
+.modalboot>p {
     font-size: 1.8vw;
-}
-table{
-    padding-top:50px;
-}
-th, td{
-    padding-left: 15px;
-    padding-right: 15px;
-}
-#virtual-devices{
-    padding-top: 20px;
-    visibility: hidden;
-    font-size: 1.8vw;
-}
-#pressEnter{
-    padding-top: 40px;
-    visibility: hidden;
-    font-size: 2vw;
-}
-
-.underscore{
-    -webkit-animation: blink 800ms step-end infinite;
-    animation: blink 800ms step-end infinite;
-}
-
-@-webkit-keyframes blink { 50% { color: rgb(0, 0, 0); }}
-        @keyframes blink { 50% { color: rgb(0, 0, 0); }}
-
-.modal-content > p {
-    font-size: 1.8vw;
-    margin:6px;
+    margin: 6px;
     visibility: hidden;
 }
 
-.modal-content span {    
+.modalboot span {
     font-size: 1.8vw;
 }
-mark.signs{
+
+mark.signs {
     color: white;
     background: none;
-    padding:0;
-    margin:0;
+    padding: 0;
+    margin: 0;
     font-size: 1.4vw;
 }

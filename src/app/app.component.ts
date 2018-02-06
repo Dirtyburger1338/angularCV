@@ -44,24 +44,20 @@ export class AppComponent implements OnInit {
   handleKeyboardEvent(event: KeyboardEvent) {
 
     /* If bootscreen is active */
-    if ($('.modal-content').css('visibility') === 'visible') {
-      console.log($('.modal-content').css('visibility'));
+    if ($('.modalboot').css('visibility') === 'visible') {
       /* If bootscreen is waiting for input */
-      if ($('.modal-content').attr('data') === "readyToClose") {
-        console.log(2);
+      if ($('.modalboot').attr('data') === "readyToClose") {
 
-        $('.modal-content').css('visibility', 'hidden');
-        $('.modal-content').remove();
+        $('.modalboot').css('visibility', 'hidden');
+        $('.modalboot').remove();
       }
       /* do nothing */
       else {
-        console.log(3);
         return;
       }
     }
     /* If bootscreen is gone, proceed as normal */
     else {
-      console.log(4);
       let keyPress = event.keyCode;
 
       /* If we are navigating the submenu or not */
@@ -94,9 +90,10 @@ export class AppComponent implements OnInit {
           // Rightarrow treated same as enter
           if (this.isLeftMenuActive === true) {
             this.MenuElements[this.getIndex()].click();
+            
+            this.MenuElements[this.getIndex()].classList.add("active");
             this.isLeftMenuActive = false;
             this.MenuElements.removeClass('selected');
-
             this.MenuElements = $('.device-links > li > a');
             console.log(this.MenuElements);
             this.MenuElements[0].classList.add("selected");
@@ -124,24 +121,23 @@ export class AppComponent implements OnInit {
 
         case 37: {
           // Leftarrow treated as ESC
+     
           if (this.isLeftMenuActive !== true) {
             this.MenuElements.removeClass('selected');
-            this.MenuElements = $('.menu-wrapper > li > .active');
+            this.MenuElements = $('.menu-wrapper > li');
             this.isLeftMenuActive = true;
             this.MenuElements[this.getIndex()].classList.add("selected");
             this.counterContent = 0;
-
           }
           break;
         }
 
         case 27: {
-
           // (ESC) Remove the selected (red background) from the menu and put IsLeftMenuActive to true
+
           if (this.isLeftMenuActive !== true) {
             this.MenuElements.removeClass('selected');
-            this.MenuElements = $('.menu-wrapper > li > .active');
-
+            this.MenuElements = $('.menu-wrapper > li');
             this.isLeftMenuActive = true;
             this.MenuElements[this.getIndex()].classList.add("selected");
             this.counterContent = 0;
@@ -150,7 +146,7 @@ export class AppComponent implements OnInit {
         }
 
         case 13: {
-          // (ENTER) 
+          // (ENTER)   
           if (this.isLeftMenuActive === true) {
             this.MenuElements[this.getIndex()].click();
             this.isLeftMenuActive = false;
@@ -190,8 +186,9 @@ export class AppComponent implements OnInit {
 }
 
 function firstBootupLines() {
-  var b = $('.modal-content > p')
+  var b = $('.modalboot > p')
   var delay = 110;
+
   var i = 0;
 
   var interval = setInterval(function () {
@@ -242,15 +239,15 @@ function showVirtualDevices() {
 function showPressToEnter() {
   var interval = setTimeout(function () {
     $('#pressEnter').css('visibility', 'visible');
-    $('.modal-content').attr('data', 'readyToClose');
+    $('.modalboot').attr('data', 'readyToClose');
   }, 1400);
 
 }
 
 
 $('body').click(function () {
-  if ($('.modal-content').attr('data') === "readyToClose") {
-    $('.modal-content').remove();
+  if ($('.modalboot').attr('data') === "readyToClose") {
+    $('.modalboot').remove();
   }
 
 });
