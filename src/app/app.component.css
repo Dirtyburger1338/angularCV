@@ -54,18 +54,48 @@
     padding:0;
 }
 
-
-
-.modal-content p {
-    font-size: 1.3vw;
+.modal-sata{
+    width: 100vw;
+    visibility: hidden;
+    font-size: 1.8vw;
+}
+table{
+    padding-top:50px;
+}
+th, td{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+#virtual-devices{
+    padding-top: 20px;
+    visibility: hidden;
+    font-size: 1.8vw;
+}
+#pressEnter{
+    padding-top: 40px;
+    visibility: hidden;
+    font-size: 2vw;
 }
 
-.modal-content span {
-    font-size: 1.3vw;
+.underscore{
+    -webkit-animation: blink 800ms step-end infinite;
+    animation: blink 800ms step-end infinite;
+}
+
+@-webkit-keyframes blink { 50% { color: rgb(0, 0, 0); }}
+        @keyframes blink { 50% { color: rgb(0, 0, 0); }}
+
+.modal-content > p {
+    font-size: 1.8vw;
+    margin:6px;
+    visibility: hidden;
+}
+
+.modal-content span {    
+    font-size: 1.8vw;
 }
 mark.signs{
     color: white;
-    /* transform: scale(1, 0.2); */
     background: none;
     padding:0;
     margin:0;
