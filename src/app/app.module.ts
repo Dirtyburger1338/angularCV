@@ -9,7 +9,7 @@ import { DeviceComponent } from './device/device.component';
 import { FeaturesComponent } from './features/features.component';
 import { VersionComponent } from './version/version.component';
 import { ReportComponent } from './report/report.component';
-
+import { CounterService } from './services/counter.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { ReportComponent } from './report/report.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [CounterService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

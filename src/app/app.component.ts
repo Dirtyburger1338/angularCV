@@ -4,6 +4,7 @@ import { LeftmenuComponent } from './leftmenu/leftmenu.component';
 import { OnInit, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { log } from 'util';
 import { collectExternalReferences } from '@angular/compiler/src/output/output_ast';
+import { CounterService } from './services/counter.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -16,25 +17,31 @@ declare var $: any;
 
 export class AppComponent implements OnInit {
 
+
   title = 'app';
   static runIntro: boolean = true;
-  MenuElements: any;
+  menuElements: any;
   contentAreaLinks: any;
   currentView: any;
   isLeftMenuActive: boolean;
   counter: number;
   counterContent: number;
+  constructor(private counterService: CounterService) { }
+
+  hideModal() {
+    let modal = document.getElementsByClassName('modalboot');
+    modal[0].style.visibility = 'hidden';  
+    document.body.style.backgroundColor = 'rgb(30, 50, 228)';
+  }
 
   ngOnInit() {
-    this.MenuElements = $('.menu-wrapper > li > a');
+    this.menuElements = $('.menu-wrapper > li > a');
     this.isLeftMenuActive = true;
     this.counter = 0;
     this.counterContent = 0;
-
-    firstBootupLines();
-
+    // irstBootupLines();
+    this.hideModal();
   }
-
 
   /* If isLeftMenuActive is true we only do stearing on the left menu.
   If false, we instead navigate in the rightside component which content 
@@ -68,22 +75,22 @@ export class AppComponent implements OnInit {
       if (this.isLeftMenuActive === false) {
       }
       else {
-        this.MenuElements = $('.menu-wrapper > li > a');
+        this.menuElements = $('.menu-wrapper > li > a');
       }
 
       switch (keyPress) {
         case 40: {
           // ArrowDown and add Selected (which highlights red) 
-          this.MenuElements.removeClass('selected');
+          this.menuElements.removeClass('selected');
 
           if (this.isLeftMenuActive === true) {
-            this.counter++;
-            this.MenuElements[this.getIndex()].classList.add("selected");
-            this.MenuElements[this.getIndex()].click();
+
+            this.counterService.incrementCounter();
+            this.menuElements[this.getIndex()].classList.add("selected");
+            this.menuElements[this.getIndex()].click();
           } else {
             this.counterContent++;
-
-            this.MenuElements[this.getIndex()].classList.add("selected");
+            this.menuElements[this.getIndex()].classList.add("selected");
           }
 
           break;
@@ -96,44 +103,43 @@ export class AppComponent implements OnInit {
             var whichBtn = $('.active > p');
 
             if (whichBtn.text() == "Version List") {
-              this.MenuElements[this.getIndex()].click();
-              this.MenuElements[this.getIndex()].classList.add("active");
-              this.MenuElements.removeClass('selected');
+              this.menuElements[this.getIndex()].click();
+              this.menuElements[this.getIndex()].classList.add("active");
+              this.menuElements.removeClass('selected');
               this.isLeftMenuActive = false;
-              this.MenuElements = $('.device-links > li > article > h5');
+              this.menuElements = $('.device-links > li > article > h5');
               $('#2018').focus();
             }
             else if (whichBtn.text() == "Device Features") {
               //Do not change menu to inner. 
             }
             else {
-              this.MenuElements[this.getIndex()].click();
-              this.MenuElements[this.getIndex()].classList.add("active");
-              this.MenuElements.removeClass('selected');
+              this.menuElements[this.getIndex()].click();
+              this.menuElements[this.getIndex()].classList.add("active");
+              this.menuElements.removeClass('selected');
               this.isLeftMenuActive = false;
-              this.MenuElements = $('.device-links > li > a');
-              this.MenuElements[0].classList.add("selected");
+              this.menuElements = $('.device-links > li > a');
+              this.menuElements[0].classList.add("selected");
             }
           }
           else {
             console.log("no");
-            this.MenuElements[this.getIndex()].click();
+            this.menuElements[this.getIndex()].click();
           }
           break;
         }
 
         case 38: {
           // Move up and add Selected (which highlights red) 
-          this.MenuElements.removeClass('selected');
+          this.menuElements.removeClass('selected');
 
           if (this.isLeftMenuActive === true) {
-            this.counter--;
-            this.MenuElements[this.getIndex()].classList.add("selected");
-            this.MenuElements[this.getIndex()].click();
+            this.counterService.decrementCounter();
+            this.menuElements[this.getIndex()].classList.add("selected");
+            this.menuElements[this.getIndex()].click();
           } else {
             this.counterContent--;
-
-            this.MenuElements[this.getIndex()].classList.add("selected");
+            this.menuElements[this.getIndex()].classList.add("selected");
           }
           break;
         }
@@ -142,10 +148,10 @@ export class AppComponent implements OnInit {
           // Leftarrow treated as ESC
 
           if (this.isLeftMenuActive !== true) {
-            this.MenuElements.removeClass('selected');
-            this.MenuElements = $('.menu-wrapper > li');
+            this.menuElements.removeClass('selected');
+            this.menuElements = $('.menu-wrapper > li');
             this.isLeftMenuActive = true;
-            this.MenuElements[this.getIndex()].classList.add("selected");
+            this.menuElements[this.getIndex()].classList.add("selected");
             this.counterContent = 0;
           }
           break;
@@ -155,8 +161,8 @@ export class AppComponent implements OnInit {
           // (ESC) Remove the selected (red background) from the menu and put IsLeftMenuActive to true
 
           if (this.isLeftMenuActive !== true) {
-            this.MenuElements.removeClass('selected');
-            this.MenuElements = $('.menu-wrapper > li');
+            this.menuElements.removeClass('selected');
+            this.menuElements = $('.menu-wrapper > li');
             this.isLeftMenuActive = true;
             this.counterContent = 0;
           }
@@ -170,28 +176,28 @@ export class AppComponent implements OnInit {
             var whichBtn = $('.active > p');
 
             if (whichBtn.text() == "Version List") {
-              this.MenuElements[this.getIndex()].click();
-              this.MenuElements[this.getIndex()].classList.add("active");
-              this.MenuElements.removeClass('selected');
+              this.menuElements[this.getIndex()].click();
+              this.menuElements[this.getIndex()].classList.add("active");
+              this.menuElements.removeClass('selected');
               this.isLeftMenuActive = false;
-              this.MenuElements = $('.device-links > li > article > h5');
+              this.menuElements = $('.device-links > li > article > h5');
               $('#2018').focus();
             }
             else if (whichBtn.text() == "Device Features") {
               console.log("features");
             }
             else {
-              this.MenuElements[this.getIndex()].click();
-              this.MenuElements[this.getIndex()].classList.add("active");
-              this.MenuElements.removeClass('selected');
+              this.menuElements[this.getIndex()].click();
+              this.menuElements[this.getIndex()].classList.add("active");
+              this.menuElements.removeClass('selected');
               this.isLeftMenuActive = false;
-              this.MenuElements = $('.device-links > li > a');
-              this.MenuElements[0].classList.add("selected");
+              this.menuElements = $('.device-links > li > a');
+              this.menuElements[0].classList.add("selected");
             }
           }
           else {
             console.log("no");
-            this.MenuElements[this.getIndex()].click();
+            this.menuElements[this.getIndex()].click();
           }
           break;
         }
@@ -207,10 +213,10 @@ export class AppComponent implements OnInit {
 
   getIndex(): number {
     if (this.isLeftMenuActive === true) {
-      return ((this.counter % this.MenuElements.length) + this.MenuElements.length) % this.MenuElements.length;
+      return ((this.counterService.getCounter() % this.menuElements.length) + this.menuElements.length) % this.menuElements.length;
     }
     else {
-      return ((this.counterContent % this.MenuElements.length) + this.MenuElements.length) % this.MenuElements.length;
+      return ((this.counterContent % this.menuElements.length) + this.menuElements.length) % this.menuElements.length;
     }
   }
 
@@ -275,11 +281,7 @@ function showPressToEnter() {
     $('#pressEnter').css('visibility', 'visible');
     $('.modalboot').attr('data', 'readyToClose');
   }, 1400);
-
 }
-
-
-
 
 $('body').click(function (event) {
   if ($('.modalboot').attr('data') === "readyToClose") {
@@ -289,7 +291,4 @@ $('body').click(function (event) {
 });
 
 
-  $('.leftMenuLinks').click(function() {
-    console.log("menuhover");
-  });
 

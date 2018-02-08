@@ -46,3 +46,8 @@ ul>li>span:last-child {
     float: right;
     padding-right: 15px;
 }
+
+.features-wrapper{
+    padding: 30px 30px 30px 0px;
+    margin: 0px;
+}

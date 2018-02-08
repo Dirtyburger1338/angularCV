@@ -1,11 +1,11 @@
 <ul class="menu-wrapper">
     <li>
-        <a [routerLink]="['device']" [routerLinkActive]="['active']" href="" class="leftMenuLinks selected" (click)="removeClasses()">
+        <a [routerLink]="['device']" [routerLinkActive]="['active']" href="" (click)="removeClasses($event)" class="leftMenuLinks selected">
             <p>Device Details</p>
         </a>
     </li>
     <li>
-        <a [routerLink]="['features']" [routerLinkActive]="['active']" class="leftMenuLinks" href="" (click)="removeClasses()">
+        <a [routerLink]="['features']" [routerLinkActive]="['active']" (click)="removeClasses($event)" class="leftMenuLinks" href="">
             <p class="leftMenuLinks">Device Features</p>
         </a>
     </li>
@@ -20,7 +20,7 @@
         </p>
     </li>
     <li>
-        <a [routerLink]="['version']" [routerLinkActive]="['active']" class="leftMenuLinks" href="" (click)="removeClasses()">
+        <a [routerLink]="['version']" [routerLinkActive]="['active']" (click)="removeClasses($event)" class="leftMenuLinks" href="">
             <p>Version List</p>
         </a>
     </li>
@@ -40,7 +40,7 @@
         </p>
     </li>
     <li>
-        <a [routerLink]="['report']" [routerLinkActive]="['active']" class="leftMenuLinks" href="" (click)="removeClasses()">
+        <a [routerLink]="['report']" [routerLinkActive]="['active']" (click)="removeClasses($event)" class="leftMenuLinks" href="">
             <p>Request Support</p>
         </a>
     </li>
