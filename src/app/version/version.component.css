@@ -13,20 +13,6 @@ article {
     margin-bottom: 60px;
 }
 
-.active > p {
-    padding-left: 0px;
-    margin:1px;
-    
-}
-
-.active > p::before { 
-    content: '[';
-
-}
-
-.active > p::after  {
-    content: ']';
-}
-a.selected > p{
-    background-color: rgb(219, 56, 6) !important;
+h5:focus{
+    outline: none;
 }

@@ -16,7 +16,7 @@ export class LeftmenuComponent implements OnInit {
   ngOnInit() {
   }
 
-  derp() {
+  removeClasses() {
     this.MenuElements = $('.menu-wrapper > li > a');
     this.MenuElements.removeClass('active');
     this.MenuElements.removeClass('selected');

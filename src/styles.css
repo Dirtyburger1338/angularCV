@@ -11,7 +11,7 @@ body {
     font-size: 42px;
     font-size: 2.5vw;
     color: white;
-    background-color: rgb(30, 50, 228);
+    background-color: rgb(0, 0, 0);
 }
 
 p {
@@ -103,6 +103,7 @@ a:hover>p {
 a.selected>p {
     background-color: rgb(219, 56, 6) !important;
 }
+
 
 a:hover::before {
     /* content: '\25B6'; */

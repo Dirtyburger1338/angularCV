@@ -32,7 +32,9 @@ export class AppComponent implements OnInit {
     this.counterContent = 0;
 
     firstBootupLines();
+
   }
+
 
   /* If isLeftMenuActive is true we only do stearing on the left menu.
   If false, we instead navigate in the rightside component which content 
@@ -49,6 +51,8 @@ export class AppComponent implements OnInit {
       if ($('.modalboot').attr('data') === "readyToClose") {
 
         $('.modalboot').css('visibility', 'hidden');
+
+        $('body').css('background-color', 'rgb(30, 50, 228)');
         $('.modalboot').remove();
       }
       /* do nothing */
@@ -62,7 +66,6 @@ export class AppComponent implements OnInit {
 
       /* If we are navigating the submenu or not */
       if (this.isLeftMenuActive === false) {
-        this.MenuElements = $('.device-links > li > a');
       }
       else {
         this.MenuElements = $('.menu-wrapper > li > a');
@@ -73,13 +76,13 @@ export class AppComponent implements OnInit {
           // ArrowDown and add Selected (which highlights red) 
           this.MenuElements.removeClass('selected');
 
-
           if (this.isLeftMenuActive === true) {
             this.counter++;
             this.MenuElements[this.getIndex()].classList.add("selected");
             this.MenuElements[this.getIndex()].click();
           } else {
             this.counterContent++;
+
             this.MenuElements[this.getIndex()].classList.add("selected");
           }
 
@@ -87,18 +90,33 @@ export class AppComponent implements OnInit {
         }
 
         case 39: {
-          // Rightarrow treated same as enter
+          // Rightarrow (treated same as enter)
           if (this.isLeftMenuActive === true) {
-            this.MenuElements[this.getIndex()].click();
-            
-            this.MenuElements[this.getIndex()].classList.add("active");
-            this.isLeftMenuActive = false;
-            this.MenuElements.removeClass('selected');
-            this.MenuElements = $('.device-links > li > a');
-            console.log(this.MenuElements);
-            this.MenuElements[0].classList.add("selected");
+            //Check to see which section we are entering
+            var whichBtn = $('.active > p');
+
+            if (whichBtn.text() == "Version List") {
+              this.MenuElements[this.getIndex()].click();
+              this.MenuElements[this.getIndex()].classList.add("active");
+              this.MenuElements.removeClass('selected');
+              this.isLeftMenuActive = false;
+              this.MenuElements = $('.device-links > li > article > h5');
+              $('#2018').focus();
+            }
+            else if (whichBtn.text() == "Device Features") {
+              //Do not change menu to inner. 
+            }
+            else {
+              this.MenuElements[this.getIndex()].click();
+              this.MenuElements[this.getIndex()].classList.add("active");
+              this.MenuElements.removeClass('selected');
+              this.isLeftMenuActive = false;
+              this.MenuElements = $('.device-links > li > a');
+              this.MenuElements[0].classList.add("selected");
+            }
           }
           else {
+            console.log("no");
             this.MenuElements[this.getIndex()].click();
           }
           break;
@@ -114,6 +132,7 @@ export class AppComponent implements OnInit {
             this.MenuElements[this.getIndex()].click();
           } else {
             this.counterContent--;
+
             this.MenuElements[this.getIndex()].classList.add("selected");
           }
           break;
@@ -121,7 +140,7 @@ export class AppComponent implements OnInit {
 
         case 37: {
           // Leftarrow treated as ESC
-     
+
           if (this.isLeftMenuActive !== true) {
             this.MenuElements.removeClass('selected');
             this.MenuElements = $('.menu-wrapper > li');
@@ -139,7 +158,6 @@ export class AppComponent implements OnInit {
             this.MenuElements.removeClass('selected');
             this.MenuElements = $('.menu-wrapper > li');
             this.isLeftMenuActive = true;
-            this.MenuElements[this.getIndex()].classList.add("selected");
             this.counterContent = 0;
           }
           break;
@@ -148,18 +166,34 @@ export class AppComponent implements OnInit {
         case 13: {
           // (ENTER)   
           if (this.isLeftMenuActive === true) {
-            this.MenuElements[this.getIndex()].click();
-            this.isLeftMenuActive = false;
-            this.MenuElements.removeClass('selected');
+            //Check to see which section we are entering
+            var whichBtn = $('.active > p');
 
-            this.MenuElements = $('.device-links > li > a');
-            this.MenuElements[0].classList.add("selected");
+            if (whichBtn.text() == "Version List") {
+              this.MenuElements[this.getIndex()].click();
+              this.MenuElements[this.getIndex()].classList.add("active");
+              this.MenuElements.removeClass('selected');
+              this.isLeftMenuActive = false;
+              this.MenuElements = $('.device-links > li > article > h5');
+              $('#2018').focus();
+            }
+            else if (whichBtn.text() == "Device Features") {
+              console.log("features");
+            }
+            else {
+              this.MenuElements[this.getIndex()].click();
+              this.MenuElements[this.getIndex()].classList.add("active");
+              this.MenuElements.removeClass('selected');
+              this.isLeftMenuActive = false;
+              this.MenuElements = $('.device-links > li > a');
+              this.MenuElements[0].classList.add("selected");
+            }
           }
           else {
+            console.log("no");
             this.MenuElements[this.getIndex()].click();
           }
           break;
-
         }
       }
 
@@ -245,14 +279,17 @@ function showPressToEnter() {
 }
 
 
-$('body').click(function () {
+
+
+$('body').click(function (event) {
   if ($('.modalboot').attr('data') === "readyToClose") {
     $('.modalboot').remove();
+    $('body').css('background-color', 'rgb(30, 50, 228)');
   }
-
 });
 
 
-
-
+  $('.leftMenuLinks').click(function() {
+    console.log("menuhover");
+  });
 

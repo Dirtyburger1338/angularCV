@@ -1,12 +1,12 @@
 <ul class="menu-wrapper">
     <li>
-        <a [routerLink]="['device']" [routerLinkActive]="['active']" href="#" class="selected" (click)="derp()">
+        <a [routerLink]="['device']" [routerLinkActive]="['active']" href="" class="leftMenuLinks selected" (click)="removeClasses()">
             <p>Device Details</p>
         </a>
     </li>
     <li>
-        <a [routerLink]="['features']" [routerLinkActive]="['active']" href="" (click)="derp()">
-            <p>Device Features</p>
+        <a [routerLink]="['features']" [routerLinkActive]="['active']" class="leftMenuLinks" href="" (click)="removeClasses()">
+            <p class="leftMenuLinks">Device Features</p>
         </a>
     </li>
     <li>
@@ -20,7 +20,7 @@
         </p>
     </li>
     <li>
-        <a [routerLink]="['version']" [routerLinkActive]="['active']" href="" (click)="derp()">
+        <a [routerLink]="['version']" [routerLinkActive]="['active']" class="leftMenuLinks" href="" (click)="removeClasses()">
             <p>Version List</p>
         </a>
     </li>
@@ -40,7 +40,7 @@
         </p>
     </li>
     <li>
-        <a [routerLink]="['report']" [routerLinkActive]="['active']" href="#" (click)="derp()">
+        <a [routerLink]="['report']" [routerLinkActive]="['active']" class="leftMenuLinks" href="" (click)="removeClasses()">
             <p>Request Support</p>
         </a>
     </li>
