@@ -4,7 +4,7 @@ import { LeftmenuComponent } from './leftmenu/leftmenu.component';
 import { OnInit, AfterViewInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { log } from 'util';
 import { collectExternalReferences } from '@angular/compiler/src/output/output_ast';
-import { CounterService } from './services/counter.service';
+import { GlobalsService } from './services/helpers/globals.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -17,7 +17,7 @@ declare var $: any;
 
 export class AppComponent implements OnInit {
 
-
+  modal: any;
   title = 'app';
   static runIntro: boolean = true;
   menuElements: any;
@@ -26,11 +26,11 @@ export class AppComponent implements OnInit {
   isLeftMenuActive: boolean;
   counter: number;
   counterContent: number;
-  constructor(private counterService: CounterService) { }
+  constructor(private _daoGlobal: GlobalsService) { }
 
   hideModal() {
-    let modal = document.getElementsByClassName('modalboot');
-    modal[0].style.visibility = 'hidden';  
+    this.modal = document.getElementsByClassName('modalboot');
+    this.modal[0].style.visibility = 'hidden';
     document.body.style.backgroundColor = 'rgb(30, 50, 228)';
   }
 
@@ -39,7 +39,7 @@ export class AppComponent implements OnInit {
     this.isLeftMenuActive = true;
     this.counter = 0;
     this.counterContent = 0;
-    // irstBootupLines();
+    //firstBootupLines();
     this.hideModal();
   }
 
@@ -84,8 +84,7 @@ export class AppComponent implements OnInit {
           this.menuElements.removeClass('selected');
 
           if (this.isLeftMenuActive === true) {
-
-            this.counterService.incrementCounter();
+            this._daoGlobal.incrementCounter();
             this.menuElements[this.getIndex()].classList.add("selected");
             this.menuElements[this.getIndex()].click();
           } else {
@@ -123,7 +122,7 @@ export class AppComponent implements OnInit {
             }
           }
           else {
-            console.log("no");
+
             this.menuElements[this.getIndex()].click();
           }
           break;
@@ -134,7 +133,7 @@ export class AppComponent implements OnInit {
           this.menuElements.removeClass('selected');
 
           if (this.isLeftMenuActive === true) {
-            this.counterService.decrementCounter();
+            this._daoGlobal.decrementCounter();
             this.menuElements[this.getIndex()].classList.add("selected");
             this.menuElements[this.getIndex()].click();
           } else {
@@ -184,7 +183,6 @@ export class AppComponent implements OnInit {
               $('#2018').focus();
             }
             else if (whichBtn.text() == "Device Features") {
-              console.log("features");
             }
             else {
               this.menuElements[this.getIndex()].click();
@@ -196,33 +194,22 @@ export class AppComponent implements OnInit {
             }
           }
           else {
-            console.log("no");
             this.menuElements[this.getIndex()].click();
           }
           break;
         }
       }
-
     }
-
-
-
-
-
   }
 
   getIndex(): number {
     if (this.isLeftMenuActive === true) {
-      return ((this.counterService.getCounter() % this.menuElements.length) + this.menuElements.length) % this.menuElements.length;
+      return ((this._daoGlobal.getGlobalCounter() % this.menuElements.length) + this.menuElements.length) % this.menuElements.length;
     }
     else {
       return ((this.counterContent % this.menuElements.length) + this.menuElements.length) % this.menuElements.length;
     }
   }
-
-
-
-
 }
 
 function firstBootupLines() {
@@ -266,6 +253,7 @@ function showSata() {
   var interval = setTimeout(function () {
     $('.modal-sata').css('visibility', 'visible');
   }, 650);
+  clearInterval(interval);
   showVirtualDevices();
 }
 
@@ -273,6 +261,7 @@ function showVirtualDevices() {
   var interval = setTimeout(function () {
     $('#virtual-devices').css('visibility', 'visible');
   }, 1000);
+  clearInterval(interval);
   showPressToEnter()
 }
 
@@ -289,6 +278,3 @@ $('body').click(function (event) {
     $('body').css('background-color', 'rgb(30, 50, 228)');
   }
 });
-
-
-

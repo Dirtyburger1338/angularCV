@@ -5,6 +5,7 @@ import { DeviceComponent } from './device.component';
 describe('DeviceComponent', () => {
   let component: DeviceComponent;
   let fixture: ComponentFixture<DeviceComponent>;
+ 
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

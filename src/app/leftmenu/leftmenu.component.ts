@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { log } from 'util';
 import { createWiresService } from 'selenium-webdriver/firefox';
-import { CounterService } from '../services/counter.service';
+import { GlobalsService } from '../services/helpers/globals.service';
 
 declare var jquery: any;
 declare var $: any;
@@ -14,7 +14,7 @@ declare var $: any;
 export class LeftmenuComponent implements OnInit {
   MenuElements: any;
   
-  constructor(private counterService : CounterService) { 
+  constructor(private _daoGlobals : GlobalsService) { 
     
   }
 
@@ -32,7 +32,7 @@ export class LeftmenuComponent implements OnInit {
     for(let i = 0; i < this.MenuElements.length; i++){
       if(this.MenuElements[i].innerText == event.target.innerText){
         this.MenuElements[i].classList.add("selected");
-        this.counterService.setGlobalCounter(i);
+        this._daoGlobals.setGlobalCounter(i);
       }
     }
   }

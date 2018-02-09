@@ -9,7 +9,7 @@ import { DeviceComponent } from './device/device.component';
 import { FeaturesComponent } from './features/features.component';
 import { VersionComponent } from './version/version.component';
 import { ReportComponent } from './report/report.component';
-import { CounterService } from './services/counter.service';
+import { GlobalsService } from './services/helpers/globals.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +25,7 @@ import { CounterService } from './services/counter.service';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [CounterService],
+  providers: [GlobalsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

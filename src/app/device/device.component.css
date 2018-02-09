@@ -20,7 +20,7 @@ span{
     outline: none;
     width: 600px;
     max-width: 100vw;
-    height: 30vw;
+    height: 60vw;
     margin: 0px;
     padding: 0px;
     position: absolute;
@@ -40,7 +40,13 @@ mark.yellow{
     color:white;
 }
 #portrait{
-    visibility: hidden;
+    display:block;
+    /* line-height:7px;  */
+    font-size: 7px; 
+    font-weight:bold;
+    /* white-space:pre; */
+    font-family: monospace;
+    margin-top: 20px;
 }
 animatedText2{
     visibility: hidden;
@@ -51,6 +57,7 @@ animatedText2{
 #modalTopMenu {
     margin: 0px;
     height: 2.5vh;
+    outline: none;
     line-height: 2.5vh;
     width: 100%;
     color: rgba(0, 0, 0, 0.822);
@@ -61,6 +68,7 @@ animatedText2{
     position: absolute;
     top: 2vh;
     left: 0;
+    padding: 10px;
 }
 
 #modalTopMenu p {
