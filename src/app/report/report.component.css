@@ -28,3 +28,12 @@ p{
 a.selected > p{
     background-color: rgb(219, 56, 6) !important;
 }
+input {
+    float:right;
+    background-color: rgba(255, 0, 0, 0);
+    border: none;
+    box-shadow: none;
+}
+.contact-wrapper{
+    padding: 15px;
+}

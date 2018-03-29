@@ -6,7 +6,9 @@ mark.yellow {
     color: white;
     margin: 2px;
 }
-
+li:focus{
+    outline: none;
+}
 p {
     padding-left: 10px;
     margin: 0;

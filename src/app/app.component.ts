@@ -95,39 +95,6 @@ export class AppComponent implements OnInit {
           break;
         }
 
-        case 39: {
-          // Rightarrow (treated same as enter)
-          if (this.isLeftMenuActive === true) {
-            //Check to see which section we are entering
-            var whichBtn = $('.active > p');
-
-            if (whichBtn.text() == "Version List") {
-              this.menuElements[this.getIndex()].click();
-              this.menuElements[this.getIndex()].classList.add("active");
-              this.menuElements.removeClass('selected');
-              this.isLeftMenuActive = false;
-              this.menuElements = $('.device-links > li > article > h5');
-              $('#2018').focus();
-            }
-            else if (whichBtn.text() == "Device Features") {
-              //Do not change menu to inner. 
-            }
-            else {
-              this.menuElements[this.getIndex()].click();
-              this.menuElements[this.getIndex()].classList.add("active");
-              this.menuElements.removeClass('selected');
-              this.isLeftMenuActive = false;
-              this.menuElements = $('.device-links > li > a');
-              this.menuElements[0].classList.add("selected");
-            }
-          }
-          else {
-
-            this.menuElements[this.getIndex()].click();
-          }
-          break;
-        }
-
         case 38: {
           // Move up and add Selected (which highlights red) 
           this.menuElements.removeClass('selected');
@@ -143,9 +110,14 @@ export class AppComponent implements OnInit {
           break;
         }
 
-        case 37: {
-          // Leftarrow treated as ESC
+        case 37: 
+        case 27: {
+          // (ESC or leftArrow) Remove the selected (red background) from the menu and put IsLeftMenuActive to true
+          if ($('#myModal').css('visibility') == 'visible'){
+            console.log("visible");
+            $('#myModal').click();
 
+          }
           if (this.isLeftMenuActive !== true) {
             this.menuElements.removeClass('selected');
             this.menuElements = $('.menu-wrapper > li');
@@ -156,25 +128,14 @@ export class AppComponent implements OnInit {
           break;
         }
 
-        case 27: {
-          // (ESC) Remove the selected (red background) from the menu and put IsLeftMenuActive to true
-
-          if (this.isLeftMenuActive !== true) {
-            this.menuElements.removeClass('selected');
-            this.menuElements = $('.menu-wrapper > li');
-            this.isLeftMenuActive = true;
-            this.counterContent = 0;
-          }
-          break;
-        }
-
+        case 39:
         case 13: {
-          // (ENTER)   
+          // (ENTER or Rightarrow)   
           if (this.isLeftMenuActive === true) {
             //Check to see which section we are entering
             var whichBtn = $('.active > p');
 
-            if (whichBtn.text() == "Version List") {
+            if (whichBtn.text() == " History ") {
               this.menuElements[this.getIndex()].click();
               this.menuElements[this.getIndex()].classList.add("active");
               this.menuElements.removeClass('selected');
@@ -182,7 +143,15 @@ export class AppComponent implements OnInit {
               this.menuElements = $('.device-links > li > article > h5');
               $('#2018').focus();
             }
-            else if (whichBtn.text() == "Device Features") {
+            else if (whichBtn.text() == " Skills ") {
+              console.log("features");
+              this.menuElements[this.getIndex()].click();
+              this.menuElements[this.getIndex()].classList.add("active");
+              this.menuElements.removeClass('selected');
+              this.isLeftMenuActive = false;
+              this.menuElements = $('.device-links > li > span');
+              document.getElementById('firstspan').focus();
+              $('#firstspan').css('color', 'black');
             }
             else {
               this.menuElements[this.getIndex()].click();

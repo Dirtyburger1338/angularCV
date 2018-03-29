@@ -13,7 +13,28 @@ body {
     color: white;
     background-color: rgb(0, 0, 0);
 }
-
+label {
+    margin: 10px;
+}
+input{
+    font-family: myFirstFont;
+    margin:0px;
+    font-size: 2.5vw;
+    color: white;
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: yellow;
+  }
+placeholder{
+    font-family: myFirstFont;
+    font-size: 2.5vw;
+    color: white;
+}
+input[type=text] {
+    font-family: myFirstFont;
+    font-size: 2.5vw;
+    color: white;
+}
 p {
     margin: 0px;
 }
@@ -86,7 +107,6 @@ a:hover>p {
 a.selected>p {
     background-color: rgb(219, 56, 6) !important;
 }
-
 
 a:hover::before {
     /* content: '\25B6'; */

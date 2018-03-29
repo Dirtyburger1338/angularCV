@@ -25,9 +25,14 @@ export class DeviceComponent implements OnInit {
     this.i = 0;
     this.span = document.getElementsByClassName("close")[0];
   }
-
+  closeModal() : void{
+    if(this._daoGlobals.getModalHasBeenOpened()){
+      $('#myModal').css('visibility', 'hidden');
+    }
+    
+  }
   openModal(): void {
-
+    $('#myModal').css('visibility', 'visible');
 
     this.firstTypingAnimation();
 
@@ -85,23 +90,33 @@ export class DeviceComponent implements OnInit {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 
-  firstTypingAnimation(): void {
-    let randomSpeed = this.getIntervalNumber();
-    if (this.i < this.txt.length) {
-      document.getElementById("animatedText1").innerHTML += this.txt.charAt(this.i);
-      this.i++;
 
-      this.delay(randomSpeed).then(() => {
-        this.firstTypingAnimation();
-      });
+  firstTypingAnimation(): void {
+    // If this is the second time it opens, dont do the animations
+    if(this._daoGlobals.getModalHasBeenOpened()){
+      document.getElementById("animatedText1").innerHTML = this.txt;
+      this.secondTypeAnimation();
     }
-    else {
-      this.i = 0;
-      $('#modalNextLine').css('visibility', 'visible');
-      this.delay(randomSpeed).then(() => {
-        this.secondTypeAnimation();
-      });
+    //First time it opens:
+    else{
+      let randomSpeed = this.getIntervalNumber();
+      if (this.i < this.txt.length) {
+        document.getElementById("animatedText1").innerHTML += this.txt.charAt(this.i);
+        this.i++;
+  
+        this.delay(randomSpeed).then(() => {
+          this.firstTypingAnimation();
+        });
+      }
+      else {
+        this.i = 0;
+        document.getElementById('modalNextLine').innerHTML = 'C:\Users\Admin\images>' + '<span id="animatedText2"></span>';
+        this.delay(randomSpeed).then(() => {
+          this.secondTypeAnimation();
+        });
+      }
     }
+
   }
 
   getIntervalNumber(): number {
@@ -111,25 +126,34 @@ export class DeviceComponent implements OnInit {
   }
 
   secondTypeAnimation(): void {
-    let randomSpeed = this.getIntervalNumber();
-
-    if (this.i < this.txt2.length) {
-      document.getElementById("animatedText2").innerHTML += this.txt2.charAt(this.i);
-      this.i++;
-      this.delay(randomSpeed).then(() => {
-        this.secondTypeAnimation();
-      });
-    }
-    else {
+    //if second+ time its opened
+    if(this._daoGlobals.getModalHasBeenOpened()){
+      document.getElementById("animatedText2").innerHTML = this.txt2;
       this.PortraitPrintTypeAnimation();
     }
+    //If this is first time it opens
+    else{
+      let randomSpeed = this.getIntervalNumber();
+
+      if (this.i < this.txt2.length) {
+        document.getElementById("animatedText2").innerHTML += this.txt2.charAt(this.i);
+        this.i++;
+        this.delay(randomSpeed).then(() => {
+          this.secondTypeAnimation();
+        });
+      }
+      else {
+        this.PortraitPrintTypeAnimation();
+      }
+    }
+
+
   }
 
   printStrings(input: string, interval: number, hasBeenOpened: Boolean): void {
 
-    console.log(this._daoGlobals.getModalHasBeenOpened());
-
     if (hasBeenOpened) {
+      document.getElementById("portrait").innerHTML = "";
       for (let k = 0; k < input.length; k++) {
         if (input[k] == '!') {
           document.getElementById("portrait").innerHTML += '<br/>';          
@@ -157,6 +181,5 @@ export class DeviceComponent implements OnInit {
       this._daoGlobals.setModalHasBeenOpened(true);
     }
 
-    console.log(this._daoGlobals.getModalHasBeenOpened());
   }
 }
